@@ -12,7 +12,7 @@ import UIKit
 extension UserListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfCells
+        return viewModel?.users.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -20,8 +20,7 @@ extension UserListVC: UITableViewDelegate, UITableViewDataSource {
             fatalError()
         }
         
-        let cellViewModel = viewModel.fetchCellViewModel(at: indexPath)
-        cell.userCellViewModel = cellViewModel
+        cell.userModel = viewModel?.users[indexPath.row]
         return cell
     }
     

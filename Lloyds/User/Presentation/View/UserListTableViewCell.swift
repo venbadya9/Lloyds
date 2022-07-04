@@ -19,15 +19,15 @@ class UserListTableViewCell: UITableViewCell {
     
     // MARK: Variables
     
-    // Cell Model
-    var userCellViewModel : UserCellViewModel? {
+    // Using usermodel for configuring cell
+    var userModel : User? {
         didSet {
-            userImageView?.sd_setImage(with: URL( string: userCellViewModel?.avatar ?? "" ), completed: nil)
-            if let firstName = userCellViewModel?.firstName,
-               let lastName = userCellViewModel?.lastName {
+            userImageView?.sd_setImage(with: URL( string: userModel?.avatar ?? "" ), completed: nil)
+            if let firstName = userModel?.firstName,
+               let lastName = userModel?.lastName {
                 nameLabel.text = firstName + " " + lastName
             }
-            emailLabel.text = userCellViewModel?.email
+            emailLabel.text = userModel?.email
         }
     }
     

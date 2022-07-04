@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: UserList
+
 struct UserList: Codable {
     let page, perPage, total, totalPages: Int
     let data: [User]
@@ -21,6 +23,8 @@ struct UserList: Codable {
     }
 }
 
+// MARK: User
+
 struct User: Codable {
     let id: Int
     let email, firstName, lastName: String
@@ -33,6 +37,8 @@ struct User: Codable {
         case avatar
     }
 }
+
+// MARK: Support
 
 struct Support: Codable {
     let url: String

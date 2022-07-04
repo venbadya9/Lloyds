@@ -13,8 +13,10 @@ enum APIError: String, Error {
     case permissionDenied = "You donot have permission"
 }
 
+typealias CompletionHandler = (_ data: [User]?, _ errorMessage: APIError?) -> Void
+
 protocol NetworkClientProtocol {
-    func getUsers(url: URL, completion: @escaping  (_ data: [User]?, _ errorMessage: APIError?) -> Void)
+    func getUsers(url: URL, completion: @escaping CompletionHandler)
 }
 
 class NetworkClient: NetworkClientProtocol {
@@ -25,7 +27,7 @@ class NetworkClient: NetworkClientProtocol {
         self.session = session
     }
 
-    func getUsers(url: URL, completion: @escaping  (_ data: [User]?, _ errorMessage: APIError?) -> Void) {
+    func getUsers(url: URL, completion: @escaping (_ data: [User]?, _ errorMessage: APIError?) -> Void) {
 
         let dataTask = session.dataTask(with: url) { (data, response, error) in
 
