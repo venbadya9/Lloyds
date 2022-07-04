@@ -1,10 +1,9 @@
 //
 //  UserViewModelTest.swift
-//  LyodsAssesmentTests
+//  Lloyds
 //
-//  Created by Mayank Juyal on 29/06/22.
+//  Created by Venkatesh Badya on 04/07/22.
 //
-
 import XCTest
 
 @testable import Lloyds
