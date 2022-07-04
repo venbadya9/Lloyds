@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  Lloyds
+
+  Created by Venkatesh Badya on 04/07/22.
+  
+*/
+
+"user_cell" = "userCell";
+"alert" = "Alert";
+"ok" = "Ok";
