@@ -24,9 +24,7 @@
 		21AC272C2872FD2100321DC5 /* UserViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC272B2872FD2100321DC5 /* UserViewModelImpl.swift */; };
 		21AC2730287304F000321DC5 /* UserListVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC272F287304F000321DC5 /* UserListVC+Extensions.swift */; };
 		21AC2732287307DA00321DC5 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC2731287307DA00321DC5 /* Endpoints.swift */; };
-		21AC274828730F8200321DC5 /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC273728730F8200321DC5 /* ProductRepository.swift */; };
-		21AC2756287316E300321DC5 /* MockUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC274028730F8200321DC5 /* MockUseCase.swift */; };
-		21AC2757287316EA00321DC5 /* MockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC274628730F8200321DC5 /* MockRepository.swift */; };
+		21AC274828730F8200321DC5 /* UserRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC273728730F8200321DC5 /* UserRepositoryTests.swift */; };
 		21AC27582873176800321DC5 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC27532873136D00321DC5 /* Helper.swift */; };
 		21BD07AE286DB30C0055FC2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD07AD286DB30C0055FC2B /* AppDelegate.swift */; };
 		21BD07B0286DB30C0055FC2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD07AF286DB30C0055FC2B /* SceneDelegate.swift */; };
@@ -37,6 +35,8 @@
 		21BD07CF286DB30E0055FC2B /* LloydsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD07CE286DB30E0055FC2B /* LloydsUITests.swift */; };
 		21BD07D1286DB30E0055FC2B /* LloydsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BD07D0286DB30E0055FC2B /* LloydsUITestsLaunchTests.swift */; };
 		21DED93028731BCC0030655E /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = 2137FAF7286EEF1A00931D97 /* User.json */; };
+		21DED9312873218E0030655E /* UserUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC273528730F8200321DC5 /* UserUseCaseTest.swift */; };
+		21DED938287326AC0030655E /* UserViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AC273B28730F8200321DC5 /* UserViewModelTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,11 +74,9 @@
 		21AC272B2872FD2100321DC5 /* UserViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModelImpl.swift; sourceTree = "<group>"; };
 		21AC272F287304F000321DC5 /* UserListVC+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserListVC+Extensions.swift"; sourceTree = "<group>"; };
 		21AC2731287307DA00321DC5 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
-		21AC273528730F8200321DC5 /* ProductUseCaseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductUseCaseTest.swift; sourceTree = "<group>"; };
-		21AC273728730F8200321DC5 /* ProductRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
+		21AC273528730F8200321DC5 /* UserUseCaseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUseCaseTest.swift; sourceTree = "<group>"; };
+		21AC273728730F8200321DC5 /* UserRepositoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRepositoryTests.swift; sourceTree = "<group>"; };
 		21AC273B28730F8200321DC5 /* UserViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModelTest.swift; sourceTree = "<group>"; };
-		21AC274028730F8200321DC5 /* MockUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockUseCase.swift; sourceTree = "<group>"; };
-		21AC274628730F8200321DC5 /* MockRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockRepository.swift; sourceTree = "<group>"; };
 		21AC27532873136D00321DC5 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		21BD07AA286DB30C0055FC2B /* Lloyds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lloyds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21BD07AD286DB30C0055FC2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				2137FB122872ACBA00931D97 /* Extension.swift */,
+				21AC27532873136D00321DC5 /* Helper.swift */,
 			);
 			path = Utlilty;
 			sourceTree = "<group>";
@@ -265,7 +264,6 @@
 		21AC273328730D7C00321DC5 /* UserModule */ = {
 			isa = PBXGroup;
 			children = (
-				21AC273C28730F8200321DC5 /* Mock */,
 				21AC273628730F8200321DC5 /* Repository */,
 				21AC273428730F8200321DC5 /* UseCase */,
 				21AC273A28730F8200321DC5 /* ViewModel */,
@@ -276,7 +274,7 @@
 		21AC273428730F8200321DC5 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				21AC273528730F8200321DC5 /* ProductUseCaseTest.swift */,
+				21AC273528730F8200321DC5 /* UserUseCaseTest.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -284,7 +282,7 @@
 		21AC273628730F8200321DC5 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				21AC273728730F8200321DC5 /* ProductRepository.swift */,
+				21AC273728730F8200321DC5 /* UserRepositoryTests.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -297,45 +295,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		21AC273C28730F8200321DC5 /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-				21AC273F28730F8200321DC5 /* MockUseCase */,
-				21AC274528730F8200321DC5 /* MockRepository */,
-			);
-			path = Mock;
-			sourceTree = "<group>";
-		};
-		21AC273F28730F8200321DC5 /* MockUseCase */ = {
-			isa = PBXGroup;
-			children = (
-				21AC274028730F8200321DC5 /* MockUseCase.swift */,
-			);
-			path = MockUseCase;
-			sourceTree = "<group>";
-		};
-		21AC274528730F8200321DC5 /* MockRepository */ = {
-			isa = PBXGroup;
-			children = (
-				21AC274628730F8200321DC5 /* MockRepository.swift */,
-			);
-			path = MockRepository;
-			sourceTree = "<group>";
-		};
 		21AC27512873135600321DC5 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				2137FAED286ECB5E00931D97 /* NetworkClientTests.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		21AC27522873135E00321DC5 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				21AC27532873136D00321DC5 /* Helper.swift */,
-			);
-			path = Utility;
 			sourceTree = "<group>";
 		};
 		21BD07A1286DB30C0055FC2B = {
@@ -361,6 +326,7 @@
 		21BD07AC286DB30C0055FC2B /* Lloyds */ = {
 			isa = PBXGroup;
 			children = (
+				2137FAFA286F061700931D97 /* Resources */,
 				2137FB112872ACA300931D97 /* Utlilty */,
 				2137FB0E2872A6BC00931D97 /* Localization */,
 				2137FB002872A01600931D97 /* User */,
@@ -376,10 +342,8 @@
 		21BD07C3286DB30E0055FC2B /* LloydsTests */ = {
 			isa = PBXGroup;
 			children = (
-				21AC27522873135E00321DC5 /* Utility */,
 				21AC27512873135600321DC5 /* Network */,
 				21AC273328730D7C00321DC5 /* UserModule */,
-				2137FAFA286F061700931D97 /* Resources */,
 			);
 			path = LloydsTests;
 			sourceTree = "<group>";
@@ -536,10 +500,8 @@
 				2137FB072872A2AC00931D97 /* UserListTableViewCell.swift in Sources */,
 				21AC2732287307DA00321DC5 /* Endpoints.swift in Sources */,
 				21BD07B2286DB30C0055FC2B /* UserListVC.swift in Sources */,
-				21AC2756287316E300321DC5 /* MockUseCase.swift in Sources */,
 				21BD07AE286DB30C0055FC2B /* AppDelegate.swift in Sources */,
 				2137FAE8286E375800931D97 /* NetworkClient.swift in Sources */,
-				21AC2757287316EA00321DC5 /* MockRepository.swift in Sources */,
 				21AC27582873176800321DC5 /* Helper.swift in Sources */,
 				2137FB132872ACBA00931D97 /* Extension.swift in Sources */,
 				21AC2730287304F000321DC5 /* UserListVC+Extensions.swift in Sources */,
@@ -561,7 +523,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2137FAEE286ECB5E00931D97 /* NetworkClientTests.swift in Sources */,
-				21AC274828730F8200321DC5 /* ProductRepository.swift in Sources */,
+				21DED938287326AC0030655E /* UserViewModelTest.swift in Sources */,
+				21AC274828730F8200321DC5 /* UserRepositoryTests.swift in Sources */,
+				21DED9312873218E0030655E /* UserUseCaseTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

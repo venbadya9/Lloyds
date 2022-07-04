@@ -29,11 +29,11 @@ class UserViewModelImpl: UserViewModel {
     func fetchUsers() {
         useCase.fetchUsers { data, errorMessage in
             if let error = errorMessage {
-                self.output?.failure(error.rawValue)
+                self.output?.handleFailure(error.rawValue)
             } else {
                 if let users = data {
                     self.users = users
-                    self.output?.success()
+                    self.output?.handleSuccess()
                 }
             }
         }

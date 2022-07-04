@@ -10,13 +10,13 @@ import UIKit
 
 extension UserListVC: CallbackStatus {
     
-    func success() {
+    func handleSuccess() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
     
-    func failure(_ message: String) {
+    func handleFailure(_ message: String) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: NSLocalizedString("alert", comment: ""), message: message, preferredStyle: .alert)
             alert.addAction( UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil))

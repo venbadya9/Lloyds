@@ -7,51 +7,61 @@
 
 import XCTest
 
-@testable import LyodsAssesment
+@testable import Lloyds
 
 class UserViewModelTest: XCTestCase {
     
-    var userViewModel: IProductViewModel?
-    var useCase = MockUseCase()
-    private var promise: XCTestExpectation!
+    var userViewModel: UserViewModel?
+    var useCase: UserUseCase!
+    var repository: UserRepository!
+    var networkClient: NetworkClient!
+    var mockSession: MockURLSession!
     
-    override func setUp() {
-        super.setUp()
-        userViewModel = ProductViewModelImpl(useCase: useCase)
-        userViewModel?.outputDelegate = self
+    private var userExpectation: XCTestExpectation!
+    
+    func testViewModel_successResult() {
+        
+        mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 200, andError: nil)
+        networkClient = NetworkClient(withSession: mockSession)
+        repository = UserRepositoryImpl(service: networkClient)
+        useCase = UserUseCaseImpl(repository: repository)
+        
+        userExpectation = expectation(description: "user fetch success")
+        
+        userViewModel = UserViewModelImpl(useCase: useCase)
+        userViewModel?.output = self
+        userViewModel?.fetchUsers()
+        
+        waitForExpectations(timeout: 1) { _ in }
     }
     
-    override func tearDown() {
-        super.tearDown()
+    func testViewModel_failureResult() {
+        
+        mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 404, andError: nil)
+        networkClient = NetworkClient(withSession: mockSession)
+        repository = UserRepositoryImpl(service: networkClient)
+        useCase = UserUseCaseImpl(repository: repository)
+        
+        userExpectation = expectation(description: "user fetch success")
+        
+        userViewModel = UserViewModelImpl(useCase: useCase)
+        userViewModel?.output = self
+                
+        userViewModel?.fetchUsers()
+        
+        waitForExpectations(timeout: 1) { _ in }
     }
-    
-    func testViewModel_Success() {
-        promise = expectation(description: "Should get success")
-        useCase.products = MockData.product
-        userViewModel?.fetchProducts()
-        wait(for: [promise], timeout: 10.0)
-    }
-    
-    func testViewModel_Fail() {
-        promise = expectation(description: "Should get fail")
-        useCase.error = NSError(domain: "com.example.error", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed Error"])
-        userViewModel?.fetchProducts()
-        wait(for: [promise], timeout: 10.0)
-    }
-    
-    
 }
 
-extension UserViewModelTest: ProductViewModelOutput {
+extension UserViewModelTest: CallbackStatus {
     
-    func success() {
-        promise.fulfill()
+    func handleSuccess() {
+        userExpectation.fulfill()
     }
     
-    func gotError(_ error: String) {
-        XCTAssertTrue(error == "Failed Error")
-        promise.fulfill()
-        //XCTFail()
+    func handleFailure(_ error: String) {
+        XCTAssertTrue(error == "Bad Url")
+        userExpectation.fulfill()
     }
     
 }

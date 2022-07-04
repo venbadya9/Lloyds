@@ -18,6 +18,6 @@ protocol UserViewModel {
 // MARK: CallbackStatus Protocol
 
 protocol CallbackStatus {
-    func success()
-    func failure(_ message: String)
+    func handleSuccess()
+    func handleFailure(_ message: String)
 }

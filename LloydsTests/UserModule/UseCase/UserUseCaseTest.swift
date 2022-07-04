@@ -1,30 +1,32 @@
 //
-//  ProductRepository.swift
-//  LyodsAssesmentTests
+//  UserUseCaseTest.swift
+//  Lloyds
 //
-//  Created by Mayank Juyal on 01/07/22.
+//  Created by Venkatesh Badya on 04/07/22.
 //
 
 import XCTest
-
 @testable import Lloyds
 
-class UserRepo: XCTestCase {
+
+class UserUseCaseTest: XCTestCase {
     
-    var userRepository: UserRepository!
+    var useCase: UserUseCase!
+    var repository: UserRepository!
     var networkClient: NetworkClient!
     var mockSession: MockURLSession!
-
-    func testRepository_successResult() {
+    
+    func testUseCase_successResult() {
         let userExpectation = expectation(description: "user fetch success")
         
         mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 200, andError: nil)
         networkClient = NetworkClient(withSession: mockSession)
-        userRepository = UserRepositoryImpl(service: networkClient)
+        repository = UserRepositoryImpl(service: networkClient)
+        useCase = UserUseCaseImpl(repository: repository)
         
         var userResponse: [User]?
         
-        userRepository.makeServiceCallToGetUsers { data, errorMessage in
+        useCase.fetchUsers { data, errorMessage in
             userResponse = data
             userExpectation.fulfill()
         }
@@ -34,16 +36,17 @@ class UserRepo: XCTestCase {
         }
     }
     
-    func testRepository_failureResult() {
+    func testUseCase_failureResult() {
         let errorExpectation = expectation(description: "user fetch failed")
         
         mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 404, andError: nil)
         networkClient = NetworkClient(withSession: mockSession)
-        userRepository = UserRepositoryImpl(service: networkClient)
+        repository = UserRepositoryImpl(service: networkClient)
+        useCase = UserUseCaseImpl(repository: repository)
         
         var errorResponse: String?
         
-        userRepository.makeServiceCallToGetUsers { data, errorMessage in
+        useCase.fetchUsers { data, errorMessage in
             errorResponse = errorMessage?.rawValue
             errorExpectation.fulfill()
         }
@@ -52,5 +55,4 @@ class UserRepo: XCTestCase {
             XCTAssertNotNil(errorResponse)
         }
     }
-    
 }
