@@ -21,19 +21,8 @@ class UserListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialConfiguration()
-    }
-    
-    // MARK: Methods
-    
-    // Configuring view model
-    func initialConfiguration() {
         
-        let service = NetworkClient()
-        let repository = UserRepositoryImpl(service: service)
-        let useCase = UserUseCaseImpl(repository: repository)
-        viewModel = UserViewModelImpl(useCase: useCase)
-        viewModel?.output = self
+        tableView.accessibilityIdentifier = "table-Users"
         viewModel?.fetchUsers()
     }
 }

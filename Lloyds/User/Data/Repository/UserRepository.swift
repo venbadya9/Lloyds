@@ -10,5 +10,5 @@ import Foundation
 // MARK: UserRepository Protocol
 
 protocol UserRepository {
-    func makeServiceCallToGetUsers(completion: @escaping CompletionHandler)
+    func makeServiceCallToGetUsers(url: URL?, completion: @escaping (Result<UserList, APIError>) -> Void)
 }

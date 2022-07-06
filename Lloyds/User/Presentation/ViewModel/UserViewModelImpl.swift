@@ -27,14 +27,14 @@ class UserViewModelImpl: UserViewModel {
     // MARK: Protocol Functions
     
     func fetchUsers() {
-        useCase.fetchUsers { data, errorMessage in
-            if let error = errorMessage {
+        self.useCase.fetchUsers { result in
+            switch result {
+            case let .success(userList):
+                let user = (userList as UserList).data
+                self.users = user
+                self.output?.handleSuccess()
+            case let .failure(error):
                 self.output?.handleFailure(error.rawValue)
-            } else {
-                if let users = data {
-                    self.users = users
-                    self.output?.handleSuccess()
-                }
             }
         }
     }

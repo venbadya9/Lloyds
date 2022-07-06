@@ -11,24 +11,24 @@ import XCTest
 class UserViewModelTest: XCTestCase {
     
     var userViewModel: UserViewModel?
-    var useCase: UserUseCase!
-    var repository: UserRepository!
-    var networkClient: NetworkClient!
-    var mockSession: MockURLSession!
+    var useCase = MockUseCase()
+    let repository = MockRepository()
     
     private var userExpectation: XCTestExpectation!
     
-    func testViewModel_successResult() {
+    override func setUp() {
+        super.setUp()
         
-        mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 200, andError: nil)
-        networkClient = NetworkClient(withSession: mockSession)
-        repository = UserRepositoryImpl(service: networkClient)
-        useCase = UserUseCaseImpl(repository: repository)
-        
-        userExpectation = expectation(description: "user fetch success")
+        repository.service = NetworkClient()
+        useCase.repository = repository
         
         userViewModel = UserViewModelImpl(useCase: useCase)
         userViewModel?.output = self
+    }
+    
+    func testViewModel_successResult() {
+
+        userExpectation = expectation(description: "user fetch success")
         userViewModel?.fetchUsers()
         
         waitForExpectations(timeout: 1) { _ in }
@@ -36,16 +36,8 @@ class UserViewModelTest: XCTestCase {
     
     func testViewModel_failureResult() {
         
-        mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 404, andError: nil)
-        networkClient = NetworkClient(withSession: mockSession)
-        repository = UserRepositoryImpl(service: networkClient)
-        useCase = UserUseCaseImpl(repository: repository)
-        
+        repository.baseUrl = URL(string: "https://reqres.in/users")!
         userExpectation = expectation(description: "user fetch success")
-        
-        userViewModel = UserViewModelImpl(useCase: useCase)
-        userViewModel?.output = self
-                
         userViewModel?.fetchUsers()
         
         waitForExpectations(timeout: 1) { _ in }
@@ -59,7 +51,7 @@ extension UserViewModelTest: CallbackStatus {
     }
     
     func handleFailure(_ error: String) {
-        XCTAssertTrue(error == "Bad Url")
+        XCTAssertTrue(error == "Data not in correct format")
         userExpectation.fulfill()
     }
     

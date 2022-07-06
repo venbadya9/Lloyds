@@ -10,68 +10,80 @@ import XCTest
 
 class NetworkClientTests: XCTestCase {
 
-    var sut: NetworkClient!
-    var mockSession: MockURLSession!
+    var service: NetworkClient!
     
     let url = URL(string: "https://reqres.in/api/users")!
     
-    override func tearDown() {
-        sut = nil
-        mockSession = nil
-        super.tearDown()
+    override func setUpWithError() throws {
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [MockURLProtocol.self]
+        let urlSession = URLSession.init(configuration: configuration)
+        service = NetworkClient(withSession: urlSession)
     }
     
-    func testNetworkClient_successResult() {
-
+    func testSuccessfulResponse() {
+        
+        let data = loadJsonData(file: "User")
         let userExpectation = expectation(description: "user fetch success")
         var userResponse: [User]?
-                
-        mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 200, andError: nil)
-        sut = NetworkClient(withSession: mockSession)
-                    
-        sut.getUsers(url: url) { user, error in
-            userResponse = user
-            userExpectation.fulfill()
+        
+        MockURLProtocol.requestHandler = { request in
+            guard let url = request.url, url == self.url else {
+                throw NSError(domain: "URL", code: NSURLErrorBadURL, userInfo: nil)
+            }
+            
+            let response = HTTPURLResponse(url: self.url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            return (response, data)
         }
         
-        waitForExpectations(timeout: 1) { (error) in
-            XCTAssertNotNil(userResponse)
+        // Call API.
+        service.getApiData(requestUrl: url, resultType: UserList.self) { result in
+            switch result {
+            case let .success(userList):
+                let users = (userList as UserList).data
+                userResponse = users
+                if let userCount = userResponse?.count, userCount > 1 {
+                    userExpectation.fulfill()
+                }
+            case let .failure(error):
+                XCTFail("Error was not expected: \(error)")
+            }
         }
+        
+        wait(for: [userExpectation], timeout: 1.0)
     }
     
-    func testNetworkClient_404Result() {
-        
-        let errorExpectation = expectation(description: "user fetch failed")
-        var errorResponse: String?
-        
-        mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 404, andError: nil)
-        sut = NetworkClient(withSession: mockSession)
-        
-        sut.getUsers(url: url) { user, error in
-            errorResponse = error?.rawValue
-            errorExpectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 1) { (error) in
-            XCTAssertNotNil(errorResponse)
-        }
-    }
     
-    func testNetworkClient_NoData() {
-        
+    func testParsingFailure() {
+        let data = Data()
         let errorExpectation = expectation(description: "user fetch failed")
-        var errorResponse: String?
         
-        mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 500, andError: nil)
-        sut = NetworkClient(withSession: mockSession)
-        
-        sut.getUsers(url: url) { user, error in
-            errorResponse = error?.rawValue
-            errorExpectation.fulfill()
+        MockURLProtocol.requestHandler = { request in
+            let response = HTTPURLResponse(url: self.url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            return (response, data)
         }
         
-        waitForExpectations(timeout: 1) { (error) in
-            XCTAssertNotNil(errorResponse)
+        // Call API.
+        service.getApiData(requestUrl: url, resultType: UserList.self) { result in
+            switch result {
+            case .success(_):
+                XCTFail("Success response was not expected.")
+            case .failure(_):
+                errorExpectation.fulfill()
+            }
         }
+        wait(for: [errorExpectation], timeout: 1.0)
+    }
+
+    private func loadJsonData(file: String) -> Data? {
+
+        if let jsonFilePath = Bundle(for: type(of: self)).path(forResource: file, ofType: "json") {
+            let jsonFileURL = URL(fileURLWithPath: jsonFilePath)
+
+            if let jsonData = try? Data(contentsOf: jsonFileURL) {
+                return jsonData
+            }
+        }
+        return nil
     }
 }

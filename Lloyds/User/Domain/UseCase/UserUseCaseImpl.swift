@@ -21,7 +21,7 @@ class UserUseCaseImpl: UserUseCase {
     
     // MARK: Protocol Functions
     
-    func fetchUsers(completion: @escaping CompletionHandler) {
-        return repository.makeServiceCallToGetUsers(completion: completion)
+    func fetchUsers(completion: @escaping (Result<UserList, APIError>) -> Void) {
+        return repository.makeServiceCallToGetUsers(url: nil, completion: completion)
     }
 }

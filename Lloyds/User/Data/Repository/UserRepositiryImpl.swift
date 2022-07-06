@@ -21,8 +21,7 @@ class UserRepositoryImpl: UserRepository {
     
     // MARK: Protocol Functions
     
-    func makeServiceCallToGetUsers(completion: @escaping CompletionHandler) {
-        return service.getUsers(url: Endpoints.userListUrl, completion: completion)
+    func makeServiceCallToGetUsers(url: URL?, completion: @escaping (Result<UserList, APIError>) -> Void) {
+        return service.getApiData(requestUrl: url ?? Endpoints.userListUrl, resultType: UserList.self, completion: completion)
     }
-    
 }

@@ -29,7 +29,7 @@ class LloydsUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        let isCompleteListLoaded = app.tables.cells.count > 5
+        let isCompleteListLoaded = app.tables.cells.count > 1
         XCTAssertTrue(isCompleteListLoaded)
     }
 }

@@ -10,5 +10,5 @@ import Foundation
 // MARK: UserUseCase Protocol
 
 protocol UserUseCase {
-    func fetchUsers(completion: @escaping CompletionHandler)
+    func fetchUsers(completion: @escaping (Result<UserList, APIError>) -> Void)
 }

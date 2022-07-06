@@ -11,22 +11,30 @@ import XCTest
 
 class UserRepositoryTests: XCTestCase {
     
-    var userRepository: UserRepository!
-    var networkClient: NetworkClient!
-    var mockSession: MockURLSession!
+    var userRepository: UserRepositoryImpl!
+    var networkClient = NetworkClient()
+    
+    let url = URL(string: "https://reqres.in/api/users")!
+    
+    override func setUpWithError() throws {
+        userRepository = UserRepositoryImpl(service: networkClient)
+    }
 
     func testRepository_successResult() {
         let userExpectation = expectation(description: "user fetch success")
-        
-        mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 200, andError: nil)
-        networkClient = NetworkClient(withSession: mockSession)
-        userRepository = UserRepositoryImpl(service: networkClient)
-        
         var userResponse: [User]?
-        
-        userRepository.makeServiceCallToGetUsers { data, errorMessage in
-            userResponse = data
-            userExpectation.fulfill()
+                
+        userRepository.makeServiceCallToGetUsers(url: nil) { result in
+            switch result {
+            case.success(let userList):
+                userResponse = userList.data
+                if let userCount = userResponse?.count,
+                   userCount > 1 {
+                    userExpectation.fulfill()
+                }
+            case .failure(let error):
+                XCTFail("Error was not expected: \(error)")
+            }
         }
         
         waitForExpectations(timeout: 1) { (error) in
@@ -35,22 +43,20 @@ class UserRepositoryTests: XCTestCase {
     }
     
     func testRepository_failureResult() {
+        let errorUrl = URL(string: "https://reqres.in/users")!
         let errorExpectation = expectation(description: "user fetch failed")
         
-        mockSession = Helper.shared.createMockSession(fromJsonFile: "User", andStatusCode: 404, andError: nil)
-        networkClient = NetworkClient(withSession: mockSession)
-        userRepository = UserRepositoryImpl(service: networkClient)
-        
-        var errorResponse: String?
-        
-        userRepository.makeServiceCallToGetUsers { data, errorMessage in
-            errorResponse = errorMessage?.rawValue
-            errorExpectation.fulfill()
+        userRepository.makeServiceCallToGetUsers(url: errorUrl) { result in
+            switch result {
+            case.success(_):
+                XCTFail("Success was not expected")
+            case .failure(_):
+                errorExpectation.fulfill()
+            }
         }
         
         waitForExpectations(timeout: 1) { (error) in
-            XCTAssertNotNil(errorResponse)
+            XCTAssertNotNil(errorExpectation)
         }
     }
-    
 }
