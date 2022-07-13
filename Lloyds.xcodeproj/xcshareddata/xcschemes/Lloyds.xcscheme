@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21BD07A9286DB30C0055FC2B"
+               BlueprintIdentifier = "21DED9B7287D93290030655E"
                BuildableName = "Lloyds.app"
                BlueprintName = "Lloyds"
                ReferencedContainer = "container:Lloyds.xcodeproj">
@@ -33,7 +33,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21BD07BF286DB30E0055FC2B"
+               BlueprintIdentifier = "21DED9CD287D932A0030655E"
                BuildableName = "LloydsTests.xctest"
                BlueprintName = "LloydsTests"
                ReferencedContainer = "container:Lloyds.xcodeproj">
@@ -43,7 +43,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "21BD07C9286DB30E0055FC2B"
+               BlueprintIdentifier = "21DED9D7287D932A0030655E"
                BuildableName = "LloydsUITests.xctest"
                BlueprintName = "LloydsUITests"
                ReferencedContainer = "container:Lloyds.xcodeproj">
@@ -65,7 +65,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21BD07A9286DB30C0055FC2B"
+            BlueprintIdentifier = "21DED9B7287D93290030655E"
             BuildableName = "Lloyds.app"
             BlueprintName = "Lloyds"
             ReferencedContainer = "container:Lloyds.xcodeproj">
@@ -82,7 +82,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "21BD07A9286DB30C0055FC2B"
+            BlueprintIdentifier = "21DED9B7287D93290030655E"
             BuildableName = "Lloyds.app"
             BlueprintName = "Lloyds"
             ReferencedContainer = "container:Lloyds.xcodeproj">

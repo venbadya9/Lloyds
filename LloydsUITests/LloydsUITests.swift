@@ -2,34 +2,59 @@
 //  LloydsUITests.swift
 //  LloydsUITests
 //
-//  Created by Venkatesh Badya on 30/06/22.
+//  Created by Venkatesh Badya on 12/07/22.
 //
 
 import XCTest
 
 class LloydsUITests: XCTestCase {
 
-    override func setUpWithError() throws {
+    var app: XCUIApplication!
+    
+    override func setUp() {
+        super.setUp()
+        
         continueAfterFailure = false
+        app = XCUIApplication()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
     }
 
-    func testUser() throws {
-        let app = XCUIApplication()
+    func testTableView() {
         app.launch()
         
-        let isUserNameLoaded = app.tables.cells.staticTexts["George Bluth"].exists
-        XCTAssertTrue(isUserNameLoaded)
+        let userTableView = app.tables["table--userTableView"]
+        XCTAssertTrue(userTableView.exists, "The user tableview exists")
+        
+        let tableCells = userTableView.cells
+        XCTAssert(tableCells.element.waitForExistence(timeout: 5.0))
+        if tableCells.count > 0 {
+            let count: Int = (tableCells.count - 1)
+         
+            let expectation = expectation(description: "Wait for table cells")
+         
+            for i in stride(from: 0, to: count , by: 1) {
+                
+                let tableCell = tableCells.element(boundBy: i)
+                XCTAssertTrue(tableCell.exists, "The \(i) cell is in place on the table")
+                
+                if i == (count - 1) {
+                    expectation.fulfill()
+                }
+            }
+            waitForExpectations(timeout: 10, handler: nil)
+            XCTAssertTrue(true, "Finished validating the table cells")
+         
+        } else {
+            XCTAssert(false, "Was not able to find any table cells")
+        }
     }
     
-    func testUserCount() throws {
-        let app = XCUIApplication()
-        app.launch()
-        
-        let isCompleteListLoaded = app.tables.cells.count > 1
-        XCTAssertTrue(isCompleteListLoaded)
+    func assertContains() -> XCUIElement {
+        let string = ".in"
+        let predicate = NSPredicate(format: "label CONTAINS[c] '\(string)'")
+        return app.staticTexts.matching(predicate).firstMatch
     }
 }
