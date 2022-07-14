@@ -11,6 +11,7 @@ import XCTest
 class UserViewModelTest: XCTestCase {
 
     var viewModel: UserViewModel!
+    var cellViewModel: UserCellViewModel!
     var useCase = MockUseCase()
     var expecatation: XCTestExpectation!
     
@@ -48,6 +49,16 @@ class UserViewModelTest: XCTestCase {
             case .failure(_):
                 self.viewModel.output?.handleFailure("Failed")
             }
+        }
+        wait(for: [expecatation], timeout: 1.0)
+    }
+    
+    func testCellViewModel() {
+        expecatation = expectation(description: "Loaded CellViewModel")
+        var users: [UserCellViewModel] = [UserCellViewModel]()
+        users =  self.viewModel.processFetchedUsers(UserListMockData.userList.data)
+        if users.count > 0 {
+            expecatation.fulfill()
         }
         wait(for: [expecatation], timeout: 1.0)
     }

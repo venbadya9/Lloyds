@@ -19,7 +19,6 @@
 		2186BEF5287DFA2F00A65A2F /* UserDataListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2186BEF4287DFA2F00A65A2F /* UserDataListDTO.swift */; };
 		2186BEFA287E101600A65A2F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2186BEF9287E101600A65A2F /* Constant.swift */; };
 		2186BEFD287E296200A65A2F /* DataList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2186BEFC287E296200A65A2F /* DataList.swift */; };
-		2186BF01287EACCF00A65A2F /* UserListVC+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2186BEFE287EACCF00A65A2F /* UserListVC+Extensions.swift */; };
 		2186BF02287EACCF00A65A2F /* UserListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2186BEFF287EACCF00A65A2F /* UserListVC.swift */; };
 		2186BF03287EACCF00A65A2F /* UserListVC+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2186BF00287EACCF00A65A2F /* UserListVC+DataSource.swift */; };
 		2186BF05287EAD1B00A65A2F /* UserListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2186BF04287EAD1B00A65A2F /* UserListTableViewCell.swift */; };
@@ -83,7 +82,6 @@
 		2186BEF4287DFA2F00A65A2F /* UserDataListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataListDTO.swift; sourceTree = "<group>"; };
 		2186BEF9287E101600A65A2F /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		2186BEFC287E296200A65A2F /* DataList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataList.swift; sourceTree = "<group>"; };
-		2186BEFE287EACCF00A65A2F /* UserListVC+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserListVC+Extensions.swift"; sourceTree = "<group>"; };
 		2186BEFF287EACCF00A65A2F /* UserListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListVC.swift; sourceTree = "<group>"; };
 		2186BF00287EACCF00A65A2F /* UserListVC+DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserListVC+DataSource.swift"; sourceTree = "<group>"; };
 		2186BF04287EAD1B00A65A2F /* UserListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListTableViewCell.swift; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 			children = (
 				2186BEFF287EACCF00A65A2F /* UserListVC.swift */,
 				2186BF00287EACCF00A65A2F /* UserListVC+DataSource.swift */,
-				2186BEFE287EACCF00A65A2F /* UserListVC+Extensions.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -608,7 +605,6 @@
 				2186BF03287EACCF00A65A2F /* UserListVC+DataSource.swift in Sources */,
 				2186BEEA287DE01B00A65A2F /* NetworkManager.swift in Sources */,
 				2186BEE8287DDC9F00A65A2F /* UserRepository.swift in Sources */,
-				2186BF01287EACCF00A65A2F /* UserListVC+Extensions.swift in Sources */,
 				2186BF33287ED42900A65A2F /* MockService.swift in Sources */,
 				2186BF31287ED41000A65A2F /* MockRepository.swift in Sources */,
 				2186BEF5287DFA2F00A65A2F /* UserDataListDTO.swift in Sources */,

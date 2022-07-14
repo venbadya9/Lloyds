@@ -32,7 +32,7 @@ class UserViewModel: IUserViewModel {
             switch result {
             case let .success(userList):
                     let users = userList.data
-                    self.processFetchedUsers(users)
+                    self.users = self.processFetchedUsers(users)
                     self.output?.handleSuccess()
             case let .failure(error):
                 self.output?.handleFailure(error.localizedDescription)
@@ -42,21 +42,20 @@ class UserViewModel: IUserViewModel {
     
     // MARK: Methods
     
-    func processFetchedUsers(_ users: [UserList.User]) {
+    func processFetchedUsers(_ users: [UserList.User]) -> [UserCellViewModel] {
         var userCellViewModel = [UserCellViewModel]()
         for user in users {
             userCellViewModel.append(generateCellViewModel(user))
         }
-        self.users = userCellViewModel
+        return userCellViewModel
     }
     
     func generateCellViewModel(_ user: UserList.User) -> UserCellViewModel {
-        
         return UserCellViewModel(
-            email: user.email,
-            firstName:user.firstName,
-            lastName: user.lastName,
-            avatar: user.avatar
+            user.email,
+            user.firstName,
+            user.lastName,
+            user.avatar
         )
     }
 }

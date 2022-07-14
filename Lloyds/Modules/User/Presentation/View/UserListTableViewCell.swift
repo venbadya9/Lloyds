@@ -12,10 +12,10 @@ class UserListTableViewCell: UITableViewCell {
     
     //MARK: IBOutlets
     
-    @IBOutlet weak var bgView: UIView!
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet private weak var bgView: UIView!
+    @IBOutlet private weak var userImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
     
     // MARK: Variables
     
@@ -23,10 +23,7 @@ class UserListTableViewCell: UITableViewCell {
     var userCellModel : UserCellViewModel? {
         didSet {
             userImageView?.sd_setImage(with: URL( string: userCellModel?.avatar ?? "" ), completed: nil)
-            if let firstName = userCellModel?.firstName,
-               let lastName = userCellModel?.lastName {
-                nameLabel.text = firstName + " " + lastName
-            }
+            nameLabel.text = userCellModel?.fullName
             emailLabel.text = userCellModel?.email
         }
     }
